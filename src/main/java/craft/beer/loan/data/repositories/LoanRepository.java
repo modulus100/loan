@@ -13,15 +13,13 @@ import java.util.stream.Collectors;
 public class LoanRepository implements ILoanRepository {
 
     private final ReentrantReadWriteLock rwLock = new ReentrantReadWriteLock();
-    private final Lock readLock = rwLock.readLock();
-    private final Lock writeLock = rwLock.writeLock();
-
     private final HashSet<String> approvers = new HashSet<>();
     private final HashMap<String, ApprovalRequestEntity> approvalRequests = new HashMap<>();
     private final HashMap<String, HashSet<String>> approverApprovedRequests = new HashMap<>();
 
     @Override
     public void addApprovers(Collection<String> approvers) {
+        Lock writeLock = rwLock.writeLock();
         writeLock.lock();
         try {
             this.approvers.addAll(approvers);
@@ -39,6 +37,7 @@ public class LoanRepository implements ILoanRepository {
 
     @Override
     public void createApprovalRequest(ApprovalRequestEntity request) {
+        Lock writeLock = rwLock.writeLock();
         writeLock.lock();
         try {
             approvalRequests.put(request.getCustomerId(), request);
@@ -49,6 +48,7 @@ public class LoanRepository implements ILoanRepository {
 
     @Override
     public void updateApprovalRequest(ApprovalUpdateRequest request) {
+        Lock writeLock = rwLock.writeLock();
         writeLock.lock();
         try {
             if (request.isApproved()) {
@@ -67,6 +67,7 @@ public class LoanRepository implements ILoanRepository {
 
     @Override
     public boolean isLoanRequestCreated(String customerId) {
+        Lock readLock = rwLock.readLock();
         readLock.lock();
         try {
             return approvalRequests.containsKey(customerId);
@@ -77,6 +78,7 @@ public class LoanRepository implements ILoanRepository {
 
     @Override
     public ApprovalRequestEntity getApprovalRequestById(String id) {
+        Lock readLock = rwLock.readLock();
         readLock.lock();
         try {
             return approvalRequests.get(id);
@@ -87,6 +89,7 @@ public class LoanRepository implements ILoanRepository {
 
     @Override
     public boolean approverExists(String approver) {
+        Lock readLock = rwLock.readLock();
         readLock.lock();
         try {
             return approvers.contains(approver);
@@ -97,13 +100,20 @@ public class LoanRepository implements ILoanRepository {
 
     @Override
     public Map<String, HashSet<String>> getApprovedApprovals(HashSet<String> approvers) {
-        return approverApprovedRequests.entrySet().stream()
-                .filter(requests -> approvers.contains(requests.getKey()))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        Lock readLock = rwLock.readLock();
+        readLock.lock();
+        try {
+            return approverApprovedRequests.entrySet().stream()
+                    .filter(requests -> approvers.contains(requests.getKey()))
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        } finally {
+            readLock.unlock();
+        }
     }
 
     @Override
     public void updateApprovedByAll(String customerId, boolean approvedByAll) {
+        Lock writeLock = rwLock.writeLock();
         writeLock.lock();
         try {
             var approvalRequest = approvalRequests.get(customerId);
@@ -116,6 +126,7 @@ public class LoanRepository implements ILoanRepository {
 
     @Override
     public List<ApprovalRequestEntity> getApprovedRequestsByInterval(int interval) {
+        Lock readLock = rwLock.readLock();
         readLock.lock();
         try {
             return approvalRequests.values().stream()
@@ -132,7 +143,13 @@ public class LoanRepository implements ILoanRepository {
 
     @Override
     public HashSet<String> getAllApprovers() {
-        return approvers;
+        Lock readLock = rwLock.readLock();
+        readLock.lock();
+        try {
+            return approvers;
+        } finally {
+            readLock.unlock();
+        }
     }
 
     @Override
