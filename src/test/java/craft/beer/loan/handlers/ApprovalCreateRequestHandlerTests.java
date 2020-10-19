@@ -31,6 +31,7 @@ public class ApprovalCreateRequestHandlerTests {
 
     @Test
     public void handle_createRequestSuccess() {
+        // arrange
         var request = new ApprovalCreateRequest();
         var requestEntity = new ApprovalRequestEntity();
         var response = new ApprovalCreateResponse();
@@ -38,8 +39,10 @@ public class ApprovalCreateRequestHandlerTests {
         when(mapper.requestToEntity(request)).thenReturn(requestEntity);
         when(mapper.entityToResponse(requestEntity)).thenReturn(response);
 
+        // act
         var result = handler.handle(request);
 
+        // assert
         verify(mapper, times(1))
                 .requestToEntity(request);
         verify(validationService, times(1))

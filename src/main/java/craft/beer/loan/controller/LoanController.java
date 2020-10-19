@@ -33,7 +33,7 @@ public class LoanController {
     }
 
     @PutMapping("/approval-request")
-    public ApproveUpdateResponse createApprovalRequest(@Valid @RequestBody ApprovalUpdateRequest request) {
+    public ApproveUpdateResponse updateApprovalRequest(@Valid @RequestBody ApprovalUpdateRequest request) {
         return pipeline.send(request);
     }
 
