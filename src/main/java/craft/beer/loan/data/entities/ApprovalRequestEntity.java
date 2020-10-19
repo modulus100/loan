@@ -20,8 +20,7 @@ public class ApprovalRequestEntity {
     private Date approvedByAllDate;
 
     @Getter
-    @Setter
-    private Date createdDate = new Date();
+    final private Date createdDate = new Date();
 
     @Getter
     @Setter
