@@ -62,7 +62,7 @@ public class LoanValidatorServiceTests {
     }
 
     @Test
-    public void validateApprovalUpdateRequest_ApproverNotValidException() {
+    public void validateApprovalUpdateRequest_approverNotValidException() {
         // arrange
         var customerId = faker.name().username();
         var approver = faker.name().username();
@@ -83,7 +83,7 @@ public class LoanValidatorServiceTests {
     }
 
     @Test
-    public void validateApprovalUpdateRequest_ApproverCantApproveException() {
+    public void validateApprovalUpdateRequest_approverCantApproveException() {
         // arrange
         var customerId = faker.name().username();
         var approver = faker.name().username();

@@ -59,7 +59,7 @@ public class LoanControllerIntegrationTests {
     }
 
     @Test
-    public void createApprovalRequestSuccess() {
+    public void createApprovalRequest_createSuccess() {
         // arrange
         var approvalRequest = new ApprovalCreateRequest();
         approvalRequest.setCustomerId("XX-XXXX-XXX");
@@ -81,7 +81,7 @@ public class LoanControllerIntegrationTests {
     }
 
     @Test
-    public void checkApprovedByAll() {
+    public void updateApprovalRequest_checkApprovedByAll() {
         // arrange
         var customerId = "XX-XXXX-XXX";
         var requestEntity = new ApprovalRequestEntity();
