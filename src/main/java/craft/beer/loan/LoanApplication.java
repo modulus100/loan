@@ -1,7 +1,7 @@
 package craft.beer.loan;
 
 import com.github.javafaker.Faker;
-import craft.beer.loan.data.ILoanRepository;
+import craft.beer.loan.data.repositories.ILoanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

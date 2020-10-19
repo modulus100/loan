@@ -5,7 +5,7 @@ import craft.beer.loan.controller.requests.ApprovalCreateRequest;
 import craft.beer.loan.controller.requests.ApprovalUpdateRequest;
 import craft.beer.loan.controller.responses.ApprovalCreateResponse;
 import craft.beer.loan.controller.responses.ApproveUpdateResponse;
-import craft.beer.loan.data.ILoanRepository;
+import craft.beer.loan.data.repositories.ILoanRepository;
 import craft.beer.loan.data.entities.ApprovalRequestEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

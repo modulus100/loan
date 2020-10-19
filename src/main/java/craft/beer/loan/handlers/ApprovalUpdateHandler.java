@@ -3,7 +3,7 @@ package craft.beer.loan.handlers;
 import an.awesome.pipelinr.Command;
 import craft.beer.loan.controller.requests.ApprovalUpdateRequest;
 import craft.beer.loan.controller.responses.ApproveUpdateResponse;
-import craft.beer.loan.data.ILoanRepository;
+import craft.beer.loan.data.repositories.ILoanRepository;
 import craft.beer.loan.services.ILoanValidatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

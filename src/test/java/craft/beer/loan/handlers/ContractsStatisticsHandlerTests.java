@@ -1,7 +1,7 @@
 package craft.beer.loan.handlers;
 
 import craft.beer.loan.controller.requests.ContractsStatisticsRequest;
-import craft.beer.loan.data.ILoanRepository;
+import craft.beer.loan.data.repositories.ILoanRepository;
 import craft.beer.loan.data.entities.ApprovalRequestEntity;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

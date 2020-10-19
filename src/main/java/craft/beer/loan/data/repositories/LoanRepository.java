@@ -1,4 +1,4 @@
-package craft.beer.loan.data;
+package craft.beer.loan.data.repositories;
 
 import craft.beer.loan.controller.requests.ApprovalUpdateRequest;
 import craft.beer.loan.data.entities.ApprovalRequestEntity;

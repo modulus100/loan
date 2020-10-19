@@ -2,7 +2,7 @@ package craft.beer.loan.services;
 
 import craft.beer.loan.controller.exceptions.LoanException;
 import craft.beer.loan.controller.requests.ApprovalUpdateRequest;
-import craft.beer.loan.data.ILoanRepository;
+import craft.beer.loan.data.repositories.ILoanRepository;
 import craft.beer.loan.data.entities.ApprovalRequestEntity;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;

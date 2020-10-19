@@ -3,7 +3,7 @@ package craft.beer.loan.services;
 import com.github.javafaker.Faker;
 import craft.beer.loan.controller.exceptions.LoanException;
 import craft.beer.loan.controller.requests.ApprovalUpdateRequest;
-import craft.beer.loan.data.ILoanRepository;
+import craft.beer.loan.data.repositories.ILoanRepository;
 import craft.beer.loan.data.entities.ApprovalRequestEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

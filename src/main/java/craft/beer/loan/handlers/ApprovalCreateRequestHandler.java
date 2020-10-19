@@ -3,7 +3,7 @@ package craft.beer.loan.handlers;
 import an.awesome.pipelinr.Command;
 import craft.beer.loan.controller.requests.ApprovalCreateRequest;
 import craft.beer.loan.controller.responses.ApprovalCreateResponse;
-import craft.beer.loan.data.ILoanRepository;
+import craft.beer.loan.data.repositories.ILoanRepository;
 import craft.beer.loan.data.entities.ApprovalRequestEntity;
 import craft.beer.loan.mappers.ApprovalMapper;
 import craft.beer.loan.services.ILoanValidatorService;
