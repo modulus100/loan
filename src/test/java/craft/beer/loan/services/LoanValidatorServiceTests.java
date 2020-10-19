@@ -26,7 +26,7 @@ public class LoanValidatorServiceTests {
     private final Faker faker = new Faker();
 
     @Test
-    public void validateApprovalCreateRequest_approvalRequestAlreadyCreatedLoanException() {
+    public void validateApprovalCreateRequest_approvalRequestAlreadyCreatedException() {
         // arrange
         var customerId = faker.name().username();
         var approvalEntity = new ApprovalRequestEntity();
@@ -44,7 +44,7 @@ public class LoanValidatorServiceTests {
     }
 
     @Test
-    public void validateApprovalUpdateRequest_approvalRequestNotCreatedLoanException() {
+    public void validateApprovalUpdateRequest_approvalRequestNotCreatedException() {
         // arrange
         var customerId = faker.name().username();
         var approvalEntity = new ApprovalUpdateRequest();
@@ -59,5 +59,49 @@ public class LoanValidatorServiceTests {
 
         // assert
         assertEquals(exceptionThatWasThrown.getMessage(), "Loan request is not created");
+    }
+
+    @Test
+    public void validateApprovalUpdateRequest_ApproverNotValidException() {
+        // arrange
+        var customerId = faker.name().username();
+        var approver = faker.name().username();
+        var approvalEntity = new ApprovalUpdateRequest();
+        approvalEntity.setCustomerId(customerId);
+        approvalEntity.setApprover(approver);
+
+        when(repository.isLoanRequestCreated(customerId)).thenReturn(true);
+        when(repository.approverExists(approver)).thenReturn(false);
+
+        // act
+        Throwable exceptionThatWasThrown = Assertions.assertThrows(
+                LoanException.class,
+                () -> validatorService.validateApprovalUpdateRequest(approvalEntity));
+
+        // assert
+        assertEquals(exceptionThatWasThrown.getMessage(), "Approver does not exist");
+    }
+
+    @Test
+    public void validateApprovalUpdateRequest_ApproverCantApproveException() {
+        // arrange
+        var customerId = faker.name().username();
+        var approver = faker.name().username();
+        var approvalRequestEntity = new ApprovalRequestEntity();
+        var approvalEntity = new ApprovalUpdateRequest();
+        approvalEntity.setCustomerId(customerId);
+        approvalEntity.setApprover(approver);
+
+        when(repository.isLoanRequestCreated(customerId)).thenReturn(true);
+        when(repository.approverExists(approver)).thenReturn(true);
+        when(repository.getApprovalRequestById(customerId)).thenReturn(approvalRequestEntity);
+
+        // act
+        Throwable exceptionThatWasThrown = Assertions.assertThrows(
+                LoanException.class,
+                () -> validatorService.validateApprovalUpdateRequest(approvalEntity));
+
+        // assert
+        assertEquals(exceptionThatWasThrown.getMessage(), "This approver can't approve");
     }
 }
