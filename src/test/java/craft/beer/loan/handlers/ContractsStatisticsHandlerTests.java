@@ -1,13 +1,11 @@
 package craft.beer.loan.handlers;
 
-import an.awesome.pipelinr.Pipeline;
 import craft.beer.loan.controller.requests.ContractsStatisticsRequest;
 import craft.beer.loan.data.ILoanRepository;
 import craft.beer.loan.data.entities.ApprovalRequestEntity;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;

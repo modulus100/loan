@@ -15,7 +15,7 @@ public class ApprovalCreateRequest implements Command<ApprovalCreateResponse> {
 
     @Getter
     @Setter
-    @Pattern(regexp = "^[A-Z0-9]{2}-[A-Z0-9]{4}-[A-Z0-9]{3}")
+    @Pattern(regexp = "^[A-Z0-9]{2}-[A-Z0-9]{4}-[A-Z0-9]{3}", message = "Customer Id is not valid")
     private String customerId;
 
     @Getter
@@ -26,6 +26,6 @@ public class ApprovalCreateRequest implements Command<ApprovalCreateResponse> {
     @Getter
     @Setter
     @NotEmpty
-    @Size(min = 1, max = 3)
+    @Size(min = 1, max = 3, message = "Number of approvers is not valid")
     private HashSet<String> approvers;
 }

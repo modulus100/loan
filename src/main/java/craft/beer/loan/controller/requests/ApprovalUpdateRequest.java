@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 public class ApprovalUpdateRequest implements Command<ApproveUpdateResponse> {
 
@@ -14,6 +15,7 @@ public class ApprovalUpdateRequest implements Command<ApproveUpdateResponse> {
     @Setter
     @NotBlank
     @NotNull
+    @Pattern(regexp = "^[A-Z0-9]{2}-[A-Z0-9]{4}-[A-Z0-9]{3}", message = "Customer Id is not valid")
     private String customerId;
 
     @Getter
