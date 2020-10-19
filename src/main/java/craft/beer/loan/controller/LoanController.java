@@ -6,20 +6,20 @@ import craft.beer.loan.controller.requests.ApprovalUpdateRequest;
 import craft.beer.loan.controller.requests.ContractsStatisticsRequest;
 import craft.beer.loan.controller.responses.ApprovalCreateResponse;
 import craft.beer.loan.controller.responses.ApproveUpdateResponse;
-import craft.beer.loan.controller.responses.ContractsStatisticsResponse;
 import craft.beer.loan.handlers.async.AsyncPing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.IntSummaryStatistics;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
 public class LoanController {
 
     @Autowired
-    Pipeline pipeline;
+    private Pipeline pipeline;
 
     @GetMapping("/async")
     public CompletableFuture<String> testAsync() {
@@ -38,7 +38,7 @@ public class LoanController {
     }
 
     @GetMapping("/statistics")
-    public ContractsStatisticsResponse getStatistics() {
+    public IntSummaryStatistics getStatistics() {
         return pipeline.send(new ContractsStatisticsRequest());
     }
 }
