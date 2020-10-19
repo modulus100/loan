@@ -1,12 +1,10 @@
 plugins {
 	id 'org.springframework.boot' version '2.3.4.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
-	id 'net.ltgt.apt' version '0.20'
 	id 'java'
 	id 'idea'
 }
 
-apply plugin: 'net.ltgt.apt-idea'
 
 group = 'craft.beer'
 version = '0.0.1-SNAPSHOT'
@@ -41,13 +39,13 @@ dependencies {
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
 
 	// additional
-	compile 'an.awesome:pipelinr:0.5'	// mediator pattern
+	implementation 'an.awesome:pipelinr:0.5'	// mediator pattern
 	implementation 'com.github.javafaker:javafaker:1.0.2'	// random data generator
 
 	// mapstruct
 	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+	testImplementation "org.testng:testng:6.10", "org.easytesting:fest-assert:1.4"
 	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
-	testAnnotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 }
 
 test {
