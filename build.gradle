@@ -12,7 +12,7 @@ group = 'craft.beer'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
-ext{
+ext {
 	mapstructVersion = "1.4.1.Final"
 }
 
