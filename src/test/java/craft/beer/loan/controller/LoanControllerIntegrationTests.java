@@ -22,7 +22,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class LoanControllerIntegrationTests {
@@ -106,7 +107,7 @@ public class LoanControllerIntegrationTests {
         // assert
         assert response != null;
         assertEquals(200, response.getStatusCodeValue());
-        assertEquals(true, response.getBody().isApprovedByAll());
+        assertTrue(response.getBody().isApprovedByAll());
     }
 
     private void generateApprovers() {

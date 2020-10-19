@@ -3,20 +3,17 @@ package craft.beer.loan.controller;
 import an.awesome.pipelinr.Pipeline;
 import craft.beer.loan.handlers.async.AsyncPing;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.concurrent.CompletableFuture;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-@RunWith(MockitoJUnitRunner.class)
 class LoanControllerTests {
 
 	@InjectMocks
@@ -35,7 +32,7 @@ class LoanControllerTests {
 		CompletableFuture<String> result = loanController.testAsync();
 
 		//assert
-		assertThat(result.get(), is(response));
+		assertEquals(result.get(), response);
 		verify(pipeline, times(1)).send(any(AsyncPing.class));
 	}
 }
