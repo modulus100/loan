@@ -77,7 +77,7 @@ class LoanControllerTests {
 	@Test
 	public void updateApprovalRequest_requestUpdated() {
 		// arrange
-		var response = new ApproveUpdateResponse("test", true);
+		var response = new ApproveUpdateResponse(faker.name().username(), true);
 		var request = new ApprovalUpdateRequest();
 
 		when(pipeline.send(any(ApprovalUpdateRequest.class))).thenReturn(response);
