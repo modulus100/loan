@@ -34,8 +34,11 @@ class ApprovalUpdateHandler implements Command.Handler<ApprovalUpdateRequest, Ap
     private boolean approvedByAll(String customerId) {
         var approvalRequest = repository.getApprovalRequestById(customerId);
         var approvedApprovals = repository.getApprovedApprovals(approvalRequest.getWhoMustApprove());
+        var whoMustApprove = approvalRequest.getWhoMustApprove();
 
-        for (String mustApprove : approvalRequest.getWhoMustApprove()) {
+        if (whoMustApprove.size() == 0) return false;
+
+        for (String mustApprove : whoMustApprove) {
             if (!approvedApprovals.containsKey(mustApprove)) {
                 return false;
             }
