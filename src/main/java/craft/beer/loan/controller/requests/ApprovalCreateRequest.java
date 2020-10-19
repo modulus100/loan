@@ -15,12 +15,12 @@ public class ApprovalCreateRequest implements Command<ApprovalCreateResponse> {
 
     @Getter
     @Setter
-    @Pattern(regexp = "^[A-Z0-9]{2}-[A-Z0-9]{4}-[A-Z0-9]{3}", message = "Customer Id is not valid")
+    @Pattern(regexp = "^[A-Z0-9]{2}-[A-Z0-9]{4}-[A-Z0-9]{3}")
     private String customerId;
 
     @Getter
     @Setter
-    @Min(value = 1, message = "Minimum amount is 1")
+    @Min(value = 1)
     private int loanAmount;
 
     @Getter

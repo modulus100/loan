@@ -15,7 +15,7 @@ public class ApprovalUpdateRequest implements Command<ApproveUpdateResponse> {
     @Setter
     @NotBlank
     @NotNull
-    @Pattern(regexp = "^[A-Z0-9]{2}-[A-Z0-9]{4}-[A-Z0-9]{3}", message = "Customer Id is not valid")
+    @Pattern(regexp = "^[A-Z0-9]{2}-[A-Z0-9]{4}-[A-Z0-9]{3}")
     private String customerId;
 
     @Getter
