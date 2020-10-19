@@ -4,7 +4,6 @@ import craft.beer.loan.controller.requests.ApprovalCreateRequest;
 import craft.beer.loan.controller.responses.ApprovalCreateResponse;
 import craft.beer.loan.data.ILoanRepository;
 import craft.beer.loan.data.entities.ApprovalRequestEntity;
-import craft.beer.loan.handlers.async.AsyncPing;
 import craft.beer.loan.mappers.ApprovalMapper;
 import craft.beer.loan.services.ILoanValidatorService;
 import org.junit.jupiter.api.Test;
@@ -13,8 +12,6 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
