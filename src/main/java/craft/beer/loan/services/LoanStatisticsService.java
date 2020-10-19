@@ -1,6 +1,5 @@
 package craft.beer.loan.services;
 
-import craft.beer.loan.controller.responses.ContractsStatisticsResponse;
 import craft.beer.loan.data.entities.ApprovalRequestEntity;
 import org.springframework.stereotype.Service;
 

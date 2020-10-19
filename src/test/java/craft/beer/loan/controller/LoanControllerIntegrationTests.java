@@ -7,6 +7,7 @@ import craft.beer.loan.controller.responses.ApprovalCreateResponse;
 import craft.beer.loan.controller.responses.ApproveUpdateResponse;
 import craft.beer.loan.data.ILoanRepository;
 import craft.beer.loan.data.entities.ApprovalRequestEntity;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -39,6 +40,12 @@ public class LoanControllerIntegrationTests {
 
     private final Faker faker = new Faker();
 
+    @BeforeEach
+    public void init() {
+        repository.clearAll();
+        generateApprovers();
+    }
+
     @Test
     public void integrationTestAsync() {
         // arrange
@@ -54,7 +61,6 @@ public class LoanControllerIntegrationTests {
     @Test
     public void createApprovalRequestSuccess() {
         // arrange
-        reset();
         var approvalRequest = new ApprovalCreateRequest();
         approvalRequest.setCustomerId("XX-XXXX-XXX");
         approvalRequest.setLoanAmount(faker.number().randomDigit());
@@ -77,7 +83,6 @@ public class LoanControllerIntegrationTests {
     @Test
     public void checkApprovedByAll() {
         // arrange
-        reset();
         var customerId = "XX-XXXX-XXX";
         var requestEntity = new ApprovalRequestEntity();
         requestEntity.setCustomerId(customerId);
@@ -124,10 +129,5 @@ public class LoanControllerIntegrationTests {
 
         repository.addApprovers(approvers);
         repository.initApprovedRequests(approvedRequests);
-    }
-
-    private void reset() {
-        repository.clearAll();
-        generateApprovers();
     }
 }
