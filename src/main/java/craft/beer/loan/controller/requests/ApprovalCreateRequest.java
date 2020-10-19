@@ -26,6 +26,6 @@ public class ApprovalCreateRequest implements Command<ApprovalCreateResponse> {
     @Getter
     @Setter
     @NotEmpty
-    @Size(min = 1, max = 3, message = "Number of approvers is not valid")
+    @Size(min=1, max=3)
     private HashSet<String> approvers;
 }
