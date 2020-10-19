@@ -7,24 +7,20 @@ import craft.beer.loan.data.ILoanRepository;
 import craft.beer.loan.data.entities.ApprovalRequestEntity;
 import craft.beer.loan.mappers.ApprovalMapper;
 import craft.beer.loan.services.ILoanValidatorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 class ApprovalCreateRequestHandler implements Command.Handler<ApprovalCreateRequest, ApprovalCreateResponse> {
 
-    final private ILoanValidatorService validationService;
-    final private ILoanRepository repository;
-    final private ApprovalMapper mapper;
+    @Autowired
+    private ILoanValidatorService validationService;
 
-    public ApprovalCreateRequestHandler(
-            ILoanValidatorService validationService,
-            ILoanRepository repository,
-            ApprovalMapper mapper) {
+    @Autowired
+    private ILoanRepository repository;
 
-        this.validationService = validationService;
-        this.repository = repository;
-        this.mapper = mapper;
-    }
+    @Autowired
+    private ApprovalMapper mapper;
 
     @Override
     public ApprovalCreateResponse handle(ApprovalCreateRequest request) {
