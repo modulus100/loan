@@ -41,12 +41,13 @@ public class ContractsStatisticsHandlerTests {
 
         // act
         var statistics = handler.handle(new ContractsStatisticsRequest());
+        var approved = statistics.getApprovedContracts();
 
         // assert
-        assertEquals(10, statistics.getAverage());
-        assertEquals(10, statistics.getMin());
-        assertEquals(10, statistics.getMax());
-        assertEquals(20, statistics.getSum());
-        assertEquals(requests.size(), statistics.getCount());
+        assertEquals(10, approved.getAverage());
+        assertEquals(10, approved.getMin());
+        assertEquals(10, approved.getMax());
+        assertEquals(20, approved.getSum());
+        assertEquals(requests.size(), approved.getCount());
     }
 }
