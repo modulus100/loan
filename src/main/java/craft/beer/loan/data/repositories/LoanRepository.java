@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Component
@@ -122,17 +123,15 @@ public class LoanRepository implements ILoanRepository {
     @Override
     public List<ApprovalRequestEntity> getApprovedRequestsByInterval(int interval) {
         readLock.lock();
+        Function<ApprovalRequestEntity, Boolean> filterByInterval = request ->
+                (new Date().getTime() - request.getApprovedByAllDate().getTime()) / 1000 > interval;
         try {
             return approvalRequests.values().stream()
-                    .filter(request -> request.isApprovedByAll() && filterByInterval(request, interval))
+                    .filter(request -> request.isApprovedByAll() && filterByInterval.apply(request))
                     .collect(Collectors.toList());
         } finally {
             readLock.unlock();
         }
-    }
-
-    private boolean filterByInterval(ApprovalRequestEntity request, int interval) {
-        return (new Date().getTime() - request.getApprovedByAllDate().getTime()) / 1000 > interval;
     }
 
     @Override
